@@ -28,7 +28,7 @@ Our workflow connects PySCF → AVAS → ffsim/LUCJ → qiskit-addon-sqd. We com
 
 | When | Focus | Expected outcome |
 | --- | --- | --- |
-| Day 1 | Run simulations and establish the classical reference | Initial outputs and recorded computational settings |
+| Day 1 | Use completed (10-electron, 10-orbital) CASCI results as the reference and develop the SQD implementation | Classical reference available; SQD implementation underway |
 | Day 2 | Compare SQD with CASCI; analyze convergence, valid-sample fractions, and orbital occupancies | Quantified energy error and benchmark plots |
 | Day 3 | Finalize runs, document methods and limitations, and prepare the presentation | Reproducible workflow and results summary |
 
