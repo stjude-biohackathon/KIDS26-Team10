@@ -1,39 +1,37 @@
-# Biohackathon Project Template
+# SQD for Iron-Sulfer Clusters
 
-This repository is a starting point for a three-day team project. This repository is populated with a starting template for team organization and planning. Use it to plan, build, and document work. Please adjust this repository to suit the needs of your team.
-
-> **Team leads:** Start with the [team lead checklist](project-management/CHECKLIST.md) before the event or during your first team meeting.
+**KIDS26 · Team 10 | Day 1: Simulations in progress**
 
 ## Project Profile
 
-- **Project name:** [Add a short, descriptive name]
-- **Question, problem, or opportunity:** [What are you exploring?]
-- **Data, inputs, or evidence:** [What will you use, and where does it come from?]
-- **Expected output:** [What will you show, test, explain, or demonstrate?]
-- **Tools and stack:** [Languages, libraries, notebooks, APIs, databases, services, or other tools]
-- **Team lead:** [Name and GitHub handle]
-- **Team members and roles:** [Link to `project-management/team.md`]
-- **Communication:** [Add the agreed channel or contact]
-
-Naming the tools and stack early helps the team lead create useful roles and divide work realistically. It is fine to revise this section as the project develops.
+- **Project name:** SQD for Iron-Sulfer Clusters
+- **Question, problem, or opportunity:** How accurately can sample-based quantum diagonalization (SQD) reproduce the ground-state energy of [2Fe-2S(SMe)₄]²⁻?
+- **Data, inputs, or evidence:** Model cluster geometry, a PySCF Hamiltonian, an AVAS-selected (10-electron, 10-orbital) Fe 3d active space, and ffsim/LUCJ samples.
+- **Expected output:** A reproducible SQD workflow benchmarked against CASCI, with energy convergence, sampling efficiency, and orbital occupancies.
+- **Tools and stack:** Python, PySCF, AVAS, ffsim/LUCJ, Qiskit, and qiskit-addon-sqd.
+- **Team lead:** Amandeep Singh Bhatia [deepquantum88](https://github.com/deepquantum88)
+- **Team members and roles:** [`project-management/team.md`](https://github.com/stjude-biohackathon/KIDS26-Team10/blob/main/project-management/team.md)
+- **Communication:** [Slack: #team10](https://stjudebiohackathon.slack.com/archives/C0BSA3JQGS1)
 
 ## Vision and Mission
 
-- **Vision:** [Describe the change, insight, or capability you hope this project supports.]
-- **Mission:** [Describe what the team will do during the biohackathon to move toward that vision.]
+- **Vision:** Evaluate quantum-assisted approaches to iron–sulfur electronic structure.
+- **Mission:** Run and benchmark an SQD pipeline against an exact classical reference in the same active space, targeting an energy error within 1.6 mHa.
 
 ## About
 
-[Add a short explanation of the motivation, background, and why the question or problem matters.]
+Iron–sulfur clusters are found in enzyme active sites. Their magnetic coupling and Fe–S covalency make their electronic structure challenging for single-reference methods.
+
+Our workflow connects PySCF → AVAS → ffsim/LUCJ → qiskit-addon-sqd. We compare SQD with CASCI using the same Hamiltonian and fixed orbitals. CASCI provides an exact reference within the selected active space.
 
 ## Roadmap and Milestones
 
 | When | Focus | Expected outcome |
 | --- | --- | --- |
-| Day 1 | Agree on the question, inputs, stack, roles, and first tasks | A shared plan and a first small change in the repository |
-| Day 2 | Build, test, and compare approaches | A working result or clear evidence about what does not work |
-| Day 3 | Stabilize, document, and present | A demo or handoff with methods, limitations, and next steps |
+| Day 1 | Run simulations and establish the classical reference | Initial outputs and recorded computational settings |
+| Day 2 | Compare SQD with CASCI; analyze convergence, valid-sample fractions, and orbital occupancies | Quantified energy error and benchmark plots |
+| Day 3 | Finalize runs, document methods and limitations, and prepare the presentation | Reproducible workflow and results summary |
 
-The goal is not a perfect production system. The goal is a clear, honest, useful result that the team can explain and others can build on.
+
 
 
