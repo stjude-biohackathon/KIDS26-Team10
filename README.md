@@ -1,5 +1,5 @@
 # Sample-based Quantum Diagonalization (SQD) for Iron-Sulfer Clusters 
-**KIDS26 · Team 10 | Day 1: Simulations in progress**
+**KIDS26 · Team 10 | Day 2: Benchmarking**
 
 ## Project Profile
 
