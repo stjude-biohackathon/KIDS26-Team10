@@ -1,0 +1,76 @@
+{
+  "tag": "sto-3g_fe3d+brs3p+fe4s",
+  "basis": "sto-3g",
+  "active": "fe3d+brs3p+fe4s",
+  "active_labels": [
+    "Fe 3d",
+    "Fe 4s",
+    "2 S 3p",
+    "3 S 3p"
+  ],
+  "geometry": "atoms            : 24\nFe-Fe            : 2.700 A\nFe-S(mu2)        : 2.200 A\nS(mu2)-S(mu2)    : 3.474 A\nFe-S(term)       : 2.300 A\nS-C              : 1.810 A\nS-Fe-S (bridge)  : 104.3 deg",
+  "avas_threshold": 0.5,
+  "nao": 122,
+  "nelec_total": [
+    93,
+    93
+  ],
+  "norb": 18,
+  "nelec_active": [
+    13,
+    13
+  ],
+  "ncore": 80,
+  "n_qubits": 36,
+  "cas_dim": 73410624,
+  "e_rhf": -5012.998695662729,
+  "e_ccsd": -5013.215901749321,
+  "ccsd_converged": false,
+  "nuclear_repulsion_energy": -4915.45789978124,
+  "casci_states": [],
+  "e_casci_singlet": null,
+  "heisenberg": {
+    "ok": false,
+    "reason": "CASCI skipped (--skip-casci)"
+  },
+  "singlet_occ_a": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "singlet_occ_b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ]
+}

@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Credentials - never commit these. stage7_hardware.py reads ~/.qiskit/qiskit-ibm.json,
+# which lives outside the repo; this is belt-and-braces.
+.qiskit/
+*qiskit-ibm.json
+*.token
+.env
+
+# Scratch run logs.  The provenance logs for the quantum-hardware runs and the clean
+# timing measurements ARE kept - they are evidence for numbers in the docs.
+results/*.log
+!results/qpu_*.log
+!results/timing_clean.log
+!results/clean_run.log
+results/batches/

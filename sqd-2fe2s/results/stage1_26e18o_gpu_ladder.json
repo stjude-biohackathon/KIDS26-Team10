@@ -1,0 +1,39 @@
+{
+  "active_space": "(26e,18o)",
+  "n_qubits": 36,
+  "cas_dim": 73410624,
+  "note": "four exact sectors computed on an A100 via gpu4pyscf; Sz=1 and Sz=0 exceeded the memory budget",
+  "sectors": [
+    {
+      "Sz": 5,
+      "dim": 43758,
+      "e_total": -5013.66471809,
+      "spin_sq": 30.0,
+      "s": 6
+    },
+    {
+      "Sz": 4,
+      "dim": 875160,
+      "e_total": -5013.66871155,
+      "spin_sq": 20.0,
+      "s": 27
+    },
+    {
+      "Sz": 3,
+      "dim": 6694974,
+      "e_total": -5013.67162414,
+      "spin_sq": 12.0,
+      "s": 367
+    },
+    {
+      "Sz": 2,
+      "dim": 25968384,
+      "e_total": -5013.67367343,
+      "spin_sq": 6.0,
+      "s": 5612
+    }
+  ],
+  "J_cm1": 82.0,
+  "lande_residual_Ha": 0.00015,
+  "singlet_extrapolated": -5013.67603364
+}

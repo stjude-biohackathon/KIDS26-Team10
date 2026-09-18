@@ -1,0 +1,15 @@
+ansatz 42s  sampling 7s
+  iter  1  err= +441.657 mHa  dim=  992,016  t=   1721s
+  iter  2  err= +264.452 mHa  dim=1,723,969  t=   3353s
+  iter  3  err= +150.301 mHa  dim=2,528,100  t=   4532s
+  iter  4  err= +113.778 mHa  dim=3,171,961  t=   5803s
+  iter  5  err=  +94.972 mHa  dim=3,814,209  t=   8115s
+  iter  6  err=  +73.323 mHa  dim=4,284,900  t=   9588s
+  iter  7  err=  +58.296 mHa  dim=4,739,329  t=  11122s
+  iter  8  err=  +47.563 mHa  dim=5,107,600  t=  13013s
+  iter  9  err=  +39.210 mHa  dim=5,452,225  t=  14663s
+  iter 10  err=  +34.478 mHa  dim=5,716,881  t=  16357s
+
+SQD TOTAL 16357s = 4.54 h over 10 iterations
+  err=+34.478 mHa  dim=5,716,881 (30.0% CAS)
+CASCI singlet (19M dets, one solve): 3463.8s = 0.96 h, exact

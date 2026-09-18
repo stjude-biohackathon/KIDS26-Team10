@@ -1,0 +1,225 @@
+{
+  "tag": "sto-3g_fe3d",
+  "config": {
+    "tag": "sto-3g_fe3d",
+    "shots": 50000,
+    "n_reps": 4,
+    "optimize_ansatz": true,
+    "backend": "ffsim",
+    "depol": 0.0,
+    "samples_per_batch": 400,
+    "num_batches": 3,
+    "max_iterations": 5,
+    "s_max": 5,
+    "spin_tol": 0.05,
+    "exact": true,
+    "seed": 2026
+  },
+  "norb": 10,
+  "nelec_total": 10,
+  "n_qubits": 20,
+  "cas_dim": 63504,
+  "nuclear_repulsion_energy": -4989.273753902026,
+  "rows": [
+    {
+      "sz": 0,
+      "nelec": [
+        5,
+        5
+      ],
+      "e_sqd": -5013.6462891511865,
+      "spin_sq_sqd": 0.009340954121638899,
+      "subspace_dim": 63001,
+      "efficiency": {
+        "shots": 50000,
+        "unique_bitstrings": 18453,
+        "frac_correct_particle_number": 1.0,
+        "frac_correct_particle_number_and_sz": 1.0
+      },
+      "t_sample_s": 7.946556806564331,
+      "t_sqd_s": 24.667665719985962,
+      "e_exact": -5013.649035272364,
+      "spin_sq_exact": 0.2521421590188364,
+      "error_mha": 2.746121177551686
+    },
+    {
+      "sz": 1,
+      "nelec": [
+        6,
+        4
+      ],
+      "e_sqd": -5013.593784368196,
+      "spin_sq_sqd": 2.046632353907563,
+      "subspace_dim": 39770,
+      "efficiency": {
+        "shots": 50000,
+        "unique_bitstrings": 14522,
+        "frac_correct_particle_number": 1.0,
+        "frac_correct_particle_number_and_sz": 1.0
+      },
+      "t_sample_s": 7.337252855300903,
+      "t_sqd_s": 24.026554107666016,
+      "e_exact": -5013.648822053286,
+      "spin_sq_exact": 2.0000002592886807,
+      "error_mha": 55.03768508970097
+    },
+    {
+      "sz": 2,
+      "nelec": [
+        7,
+        3
+      ],
+      "e_sqd": -5013.638771738971,
+      "spin_sq_sqd": 6.009758979871943,
+      "subspace_dim": 14040,
+      "efficiency": {
+        "shots": 50000,
+        "unique_bitstrings": 8030,
+        "frac_correct_particle_number": 1.0,
+        "frac_correct_particle_number_and_sz": 1.0
+      },
+      "t_sample_s": 7.31932806968689,
+      "t_sqd_s": 10.721683979034424,
+      "e_exact": -5013.648325451512,
+      "spin_sq_exact": 6.000000879971611,
+      "error_mha": 9.553712541674031
+    },
+    {
+      "sz": 3,
+      "nelec": [
+        8,
+        2
+      ],
+      "e_sqd": -5013.647561479018,
+      "spin_sq_sqd": 12.000000000225896,
+      "subspace_dim": 2025,
+      "efficiency": {
+        "shots": 50000,
+        "unique_bitstrings": 1752,
+        "frac_correct_particle_number": 1.0,
+        "frac_correct_particle_number_and_sz": 1.0
+      },
+      "t_sample_s": 7.300909042358398,
+      "t_sqd_s": 0.6730997562408447,
+      "e_exact": -5013.647561479448,
+      "spin_sq_exact": 12.00000000292064,
+      "error_mha": 4.3019099393859506e-07
+    },
+    {
+      "sz": 4,
+      "nelec": [
+        9,
+        1
+      ],
+      "e_sqd": -5013.646504755161,
+      "spin_sq_sqd": 20.000000000004743,
+      "subspace_dim": 100,
+      "efficiency": {
+        "shots": 50000,
+        "unique_bitstrings": 100,
+        "frac_correct_particle_number": 1.0,
+        "frac_correct_particle_number_and_sz": 1.0
+      },
+      "t_sample_s": 7.299876928329468,
+      "t_sqd_s": 0.23828721046447754,
+      "e_exact": -5013.6465047552465,
+      "spin_sq_exact": 20.000000000000004,
+      "error_mha": 8.549250196665525e-08
+    },
+    {
+      "sz": 5,
+      "nelec": [
+        10,
+        0
+      ],
+      "e_sqd": -5013.645116533595,
+      "spin_sq_sqd": 30.0,
+      "subspace_dim": 1,
+      "efficiency": {
+        "shots": 50000,
+        "unique_bitstrings": 1,
+        "frac_correct_particle_number": 1.0,
+        "frac_correct_particle_number_and_sz": 1.0
+      },
+      "t_sample_s": 7.264085054397583,
+      "t_sqd_s": 0.13720297813415527,
+      "e_exact": -5013.645116533595,
+      "spin_sq_exact": 30.0,
+      "error_mha": 0.0
+    }
+  ],
+  "backend_info": {
+    "backend": "ffsim",
+    "noise": "global depolarizing 0.0"
+  },
+  "reference_J_cm1": {
+    "DMRG (30e,20o), Sharma/Chan 2014": 236.0,
+    "experiment, magnetic susceptibility": 148.0,
+    "BS-DFT": 310.0
+  },
+  "heisenberg_sqd": {
+    "ok": true,
+    "J_hartree": -0.0007955060809425855,
+    "J_cm1": -174.5934038620579,
+    "convention": "H = 2 J S1.S2, E(S) = J S(S+1); J > 0 is antiferromagnetic",
+    "S_used": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "E_used": [
+      -24.372535249160137,
+      -24.320030466169555,
+      -24.36501783694439,
+      -24.373807576991567,
+      -24.372750853134676,
+      -24.371362631568445
+    ],
+    "max_residual_hartree": 0.03486374404279502,
+    "spin_tol": 0.05,
+    "dropped": [],
+    "reference_J_cm1": {
+      "DMRG (30e,20o), Sharma/Chan 2014": 236.0,
+      "experiment, magnetic susceptibility": 148.0,
+      "BS-DFT": 310.0
+    },
+    "ratio_to_dmrg": -0.7398025587375334
+  },
+  "heisenberg_exact": {
+    "ok": true,
+    "J_hartree": 0.00013233758220331285,
+    "J_cm1": 29.044742069569264,
+    "convention": "H = 2 J S1.S2, E(S) = J S(S+1); J > 0 is antiferromagnetic",
+    "S_used": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "E_used": [
+      -24.37506815125886,
+      -24.37457154948643,
+      -24.373807577421903,
+      -24.37275085321985,
+      -24.371362631568246
+    ],
+    "max_residual_hartree": 3.2726122004334e-05,
+    "spin_tol": 0.001,
+    "dropped": [
+      {
+        "S": 0,
+        "spin_sq": 0.2521421590188364
+      }
+    ],
+    "reference_J_cm1": {
+      "DMRG (30e,20o), Sharma/Chan 2014": 236.0,
+      "experiment, magnetic susceptibility": 148.0,
+      "BS-DFT": 310.0
+    },
+    "ratio_to_dmrg": 0.12307094097275112
+  }
+}

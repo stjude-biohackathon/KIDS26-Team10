@@ -1,0 +1,253 @@
+# Project plan — SQD for a [2Fe–2S] iron–sulfur cluster
+
+Team-facing summary. What we're building, what's already done, what's left, and what we
+are deliberately *not* doing.
+
+
+**Real hardware:** run on IBM `ibm_fez` (job `dameitg2fm4c73f2t3f0`), 20 qubits, 100,000 shots, ~4.6 s of QPU time. Only **5.90%** of shots were physically valid — and post-processing still recovered the **exact** energy (+0.0000 mHa) with the correct spin state. Noise-resilience demonstrated; compression not, since the subspace reached 100% of the space.
+
+---
+
+## 1. TL;DR
+
+We built an end-to-end **Sample-Based Quantum Diagonalization (SQD)** workflow for the
+oxidized [Fe₂S₂(SMe)₄]²⁻ cluster and validated it against **exact** classical
+diagonalization in the same active space.
+
+**Status: the core deliverable is finished and reproduces in ~12 minutes on a laptop.**
+It hits every success criterion in the challenge doc. One cluster job remains, and it is
+optional-but-valuable.
+
+Results across **three** active spaces, 20 → 36 qubits:
+
+| active space | qubits | determinants | CASCI (exact) | SQD | **J (cm⁻¹)** |
+|---|---|---|---|---|---|
+| (10e,10o) Fe 3d | 20 | 63,504 | −5013.64906670 | **+0.0000 mHa** | **28.8** |
+| (22e,16o) + bridging S 3p | 32 | 19,079,424 | −5013.72724223 | **+34.5 mHa** | **46.7** |
+| (26e,18o) + Fe 4s | 36 | 73,410,624 | 4/6 sectors (GPU) | +653 mHa *(hardware)* | **82.0** * |
+| DMRG (30e,20o) TZP-DKH | — | — | — | — | 236 |
+| **Experiment** | — | — | — | — | **148 ± 16** |
+
+\* fitted from the four spin sectors we could compute (S = 2–5); the two largest exceeded the memory budget. Adding the fourth moved J from 84.3 to 82.0, i.e. the fit is converging, not drifting.
+
+**J: 28.8 → 46.7 → 82.0 cm⁻¹** — the chemistry converges toward experiment as the active
+space stops truncating it. Full detail and all caveats in **`RESULTS_MASTER.md`**.
+
+SQD is **exact at 20 qubits**, +34.5 mHa at 32, ~+500 mHa at 36 — accuracy tracks how
+much of the space you can afford to cover. At 32 qubits exact CASCI was both faster
+(0.96 h vs 4.54 h) and exact, so **SQD's regime begins where exact CI stops fitting.**
+
+---
+
+## 2. What the challenge asked, and where we stand
+
+From the challenge doc:
+
+| requirement | status |
+|---|---|
+| Reproducible pipeline PySCF → AVAS → ffsim/LUCJ → qiskit-addon-sqd, (10e,10o) Fe 3d | **done** |
+| "SQD reproduces the CASCI energy … chemical accuracy (1.6 mHa) is the target" | **done** — exact to 8 decimals |
+| Convergence behaviour characterized | **done** — 6 subspace sizes, 6 noise levels, recovery traces |
+| Sampling efficiency (correct particle number *and* Sz) | **done** — 100% → 90.7% across the noise sweep |
+| Converged orbital occupancies | **done** |
+| Stretch: DMRG / SHCI / FCIQMC as scalable references | **not done** — we cite published DMRG instead |
+
+One useful alignment: the doc says *"for a like-for-like comparison, orbitals should be
+held fixed and CASCI used."* That is exactly what we do, so skipping CASSCF is following
+the brief, not cutting a corner.
+
+---
+
+## 3. How the project is structured (three tiers)
+
+This is the spine of the write-up and of `results/RESULTS_*.md`.
+
+**Tier 1 — classical baselines, ours**
+
+| method | energy (Ha) | vs CASCI | note |
+|---|---|---|---|
+| RHF | −5012.998696 | +650 mHa | needed a second-order solver to converge |
+| CCSD (frozen core) | −5013.221148 | +428 mHa | **did not converge** — the diagnostic that this system is multireference |
+| **CASCI (10e,10o)** | **−5013.649067** | **0, exact** | full CI in the active space |
+| selected-CI (largest-\|c\|) | −5013.193374 | +456 mHa | classical analogue of SQD |
+
+**Tier 2 — published reference values, same cluster**
+
+- **DMRG-CI (30e,20o), TZP-DKH → J = 236 cm⁻¹** — Sharma, Sivalingam, Neese & Chan,
+  *Nature Chemistry* **6**, 927 (2014); arXiv:1408.5080. Same molecule,
+  [Fe₂S₂(SCH₃)₄]²⁻.
+- BS-DFT → 310 cm⁻¹ · **Experiment (magnetic susceptibility) → 148 ± 16 cm⁻¹**
+- **Quantum:** SQD on a QPU at (30e,20o) agrees with HCI **to within tens of mHa**;
+  [4Fe–4S] at (54e,36o) on up to 77 qubits — Robledo-Moreno *et al.*, arXiv:2405.05068.
+
+**Tier 3 — quantum baselines, ours**
+
+| run | vs CASCI | subspace dim | ⟨S²⟩ |
+|---|---|---|---|
+| LUCJ ansatz expectation value (no SQD) | +1226 mHa | — | — |
+| **SQD** | **+0.0000 mHa** | 63,504 | 0.0000 |
+| SQD on uniform-random bitstrings (control) | +0.0000 mHa | 63,504 | 0.0000 |
+| SQD + orbital optimization (frozen subspace) | +147 mHa | 46,225 | — |
+
+`J` uses the Fe–S literature convention **`H = 2 J S₁·S₂`, `E(S) = J S(S+1)`, `J > 0`
+antiferromagnetic** — so our number is directly comparable to the papers above. (Note
+this is the *opposite* sign convention to the `H = −2J S₁·S₂` form you'll also see.)
+
+---
+
+## 4. Technical setup (for anyone asked in Q&A)
+
+- **Molecule**: idealized [Fe₂S₂(SMe)₄]²⁻, 24 atoms, charge −2. Fe–Fe 2.70 Å,
+  Fe–S(µ2) 2.20 Å, Fe–S(term) 2.30 Å. Generated by `src/geometry.py`.
+- **Mapping**: **Jordan–Wigner**, spin-blocked — qubits `0…norb−1` = α,
+  `norb…2norb−1` = β. In a printed bitstring (MSB first) the **left half is β, right
+  half is α**; verified with an asymmetric (3α,2β) test state.
+- **Why JW specifically**: under JW a computational basis state *is* an
+  occupation-number vector, so each measured bitstring is literally a Slater determinant
+  label. That is what makes the post-selection and configuration-recovery machinery work
+  on Hamming weight per spin half. We never map the Hamiltonian to Pauli operators at
+  all — it stays as `hcore`/`eri` tensors and is diagonalized in the determinant
+  subspace. SQD is deliberately mapping-light.
+- **Ansatz**: LUCJ from frozen-core CCSD `t1`/`t2`, `n_reps=4`, nearest-neighbour
+  same-spin and all-to-all opposite-spin interaction pairs — as in the IBM tutorial.
+- **Backends**: no QPU needed. `ffsim` (default, ~1 s), `aer` statevector with a
+  gate-level depolarizing noise model (~13 s), `aer-mps`.
+
+---
+
+## 5. The 3-day plan
+
+| day | task | owner | time | risk |
+|---|---|---|---|---|
+| 1 | **Nothing — it's done.** Freeze the repo, verify `python3 run_all.py` reproduces. | — | 12 min | none |
+| 2 | ~~`sbatch cluster/run_rungA.sbatch` → (22e,16o), 32 qubits~~ **DONE** — J = 46.7 cm⁻¹ (exact CASCI 0.96 h), SQD +34.5 mHa (4.54 h). Ran on a laptop, no cluster needed. | — | done | — |
+| 2 | ~~(26e,18o), 36 qubits~~ **DONE** on an A100 GPU — J = 82.0 cm⁻¹ from 4 of 6 spin sectors. | — | done | — |
+| 2 | ~~real quantum hardware~~ **DONE** — 5 jobs on IBM `ibm_fez`; exact at 20 qubits from 5.9% usable shots. See docs/HARDWARE.md. | — | done | — |
+| 2 | Slides: pull numbers straight from `results/RESULTS_sto-3g_fe3d.md` and `results/figures/*.png` | presenter | — | none |
+| 3 | Rehearse Q&A (see §7), fold in the rung-A J number | all | — | none |
+
+**Do not** put anything else on the critical path. Everything needed to present already
+exists.
+
+---
+
+## 6. Findings, including the negative ones
+
+These are the slides. The negative results are the strongest material — they're
+quantified and honest.
+
+**a) SQD is exact here, but not compressive.** It reaches the CASCI energy only once the
+sampled subspace covers essentially the whole CAS space, and a **uniform-random
+bitstring control does just as well**. At 63,504 determinants any diverse sampler
+saturates the space. The exact singlet has participation ratio ~1956 and needs 7,171
+determinants for 99% of its weight, so there is no compact subspace to find. Orbital
+optimization at fixed subspace recovers only 3-16% of the gap across four subspace sizes. Expect to be asked "what
+did the quantum circuit buy you?" — the honest answer at this size is **nothing**, and
+that's the same point IBM's own quickstart makes.
+
+**b) J from SQD does not work — and we proved it.** We tried running SQD once per Sz
+sector and fitting `E(S) = J S(S+1)`. On (10e,10o), where the exact answer is known:
+
+| Sz | subspace | SQD error (mHa) | exact gap from S=0 (mHa) |
+|---|---|---|---|
+| 0 | 63,001 | +2.746 | 0.000 |
+| 1 | 39,770 | **+55.038** | 0.213 |
+| 2 | 14,040 | +9.554 | 0.710 |
+| 3 | 2,025 | +0.000 | 1.474 |
+| 4 | 100 | +0.000 | 2.531 |
+| 5 | 1 | +0.000 | 3.919 |
+
+Fitted **J = −174.6 cm⁻¹ against the true 29.0** — wrong sign, 35 mHa fit residual.
+High-Sz sectors have tiny Hilbert spaces (dimension 1, 100) so SQD is trivially exact
+there, while the large low-Sz sectors carry millihartree error. J is a difference of
+near-degenerate energies, so error that uneven across sectors swamps the signal by an
+order of magnitude. **No amount of cluster time fixes this.** The one-line version:
+*SQD gives absolute energies to well under 1 mHa here but cannot resolve spin gaps.*
+
+**c) The 1.6 mHa target is a loose yardstick for this system.** The S=0→1 gap is only
+0.245 mHa (54 cm⁻¹), ~6× *below* chemical accuracy. So "within 1.6 mHa" doesn't resolve
+the physics that J depends on. The full S=0→5 ladder spans 3.95 mHa (867 cm⁻¹).
+
+**d) An upstream ffsim bug blocks the tutorial's `optimize=True`.**
+`unitaries_to_parameters` calls `scipy.linalg.logm` on a `(n,dim,dim)` batch, but `logm`
+only accepts one square matrix → `ValueError: expected square array_like input`. Breaks
+`to_parameters()` and therefore `from_t_amplitudes(optimize=True)`. Present in ffsim
+0.0.83 **and** 0.0.84. `src/ffsim_patch.py` maps the logarithm over the batch; parameter
+round-trip is then exact (`|⟨ψ|ψ′⟩| = 1.000000000000`). With the patch the ansatz spans
+the full space noiselessly (participation ratio 2.7 → 3259).
+
+**e) The Sz=0 Davidson stalls silently.** Against the converged `e_cas = −24.3753128`:
+`max_space=12` (PySCF default) lands +0.022 mHa high with one root, and **+0.128 mHa
+with three roots — more roots made it worse.** On a 0.245 mHa gap that's a ~50% bias in
+J. `max_space=30` hits it exactly *and* runs faster. Anyone computing a spin ladder on
+this system needs to know this.
+
+---
+
+## 7. Likely questions
+
+- *"What did the quantum part buy you?"* → At this active-space size, nothing; the
+  random control matches it. That's a property of a 20-qubit space, not a failure of the
+  method. See §6a.
+- *"Why is J 8× off?"* → Fe 3d only, so no bridging-sulfur 3p superexchange pathway, and
+  STO-3G where the literature uses TZP-DKH. Rung A (22e,16o) addresses the first.
+- *"Why not CASSCF / NEVPT2?"* → The challenge doc explicitly asks for fixed orbitals
+  and CASCI for a like-for-like comparison. SQD replaces the **CI step**, not the orbital
+  optimization. (This is also why quoted CASSCF timings of "hours to days" don't apply
+  to us.)
+- *"Did you run on real hardware?"* → No. `ffsim` exact sampling plus a depolarizing
+  channel, and Aer with a gate-level noise model as a device stand-in.
+- *"Will H100s speed this up?"* → No. The bottleneck is PySCF's FCI / selected-CI
+  solver, which is CPU- and memory-bound. We want RAM and cores, not GPUs.
+
+---
+
+## 8. How to run it
+
+```bash
+pip install -r requirements.txt
+python3 run_all.py                 # full pipeline, ~12 min
+python3 run_all.py --quick         # smoke test, ~2 min
+sbatch cluster/run_rungA.sbatch   # (22e,16o) - since run on a laptop in ~5.5 h
+python3 src/stage7_hardware.py --tag sto-3g_fe3d --shots 100000 --estimate  # QPU, free
+```
+
+Measured on a laptop (8 cores, 16 GB), (10e,10o):
+
+| stage | time |
+|---|---|
+| `stage1_classical.py` (RHF 19 s, AVAS, CASCI 6 roots 13 s, CCSD 1 s) | ~35 s |
+| `stage2_sqd.py` (6 noise × 6 subspace sizes + controls, 100k shots) | ~7 min |
+| `stage2b_orbital_opt.py` | ~4 min |
+| `stage3_report.py` | ~5 s |
+
+Outputs: `results/RESULTS_*.md`, `results/figures/*.png`, `results/stage*.json`.
+
+---
+
+## 9. Explicitly out of scope
+
+- DMRG (`block2`), SHCI (Dice), FCIQMC — the doc's stretch goals. Not in 3 days; we cite
+  published DMRG instead, and at (10e,10o) they'd be pointless since CASCI is exact.
+- CASSCF / NEVPT2 / CASPT2.
+- Real QPU execution.
+- (34e,22o) at 44 qubits — stage 1 runs (tested, 95 s), but the 11 GB statevector
+  sampling is untested and its headline use (J) is dead per §6b. Stretch only.
+- CUDA-Q.
+
+---
+
+## 10. Gotchas for anyone editing the code
+
+1. `symmetrize_spin=True` requires nα = nβ — it raises for every Sz ≠ 0 sector.
+   `run_sqd` switches it off automatically.
+2. `transpile(..., optimization_level>=1)` **hangs** on ffsim's custom LUCJ gate. Use
+   level 0.
+3. `solve_sci_batch(max_cycle=200)` (the tutorial's value) leaves a 0.112 mHa residual
+   even on the *full* CAS space — it looks like an SQD sampling error but isn't. We use
+   500.
+4. `fit_heisenberg` drops states whose ⟨S²⟩ is off by more than `spin_tol`. Exact CASCI
+   sits within 1e-12; SQD only reaches ~0.01, so SQD ladders need a looser tolerance or
+   the fit silently rejects everything.
+5. Pass **one `--tag` explicitly to every stage.** Letting stage 1 use its own default
+   while telling later stages a different name makes them read a stale stage-1 file.

@@ -1,0 +1,21 @@
+{
+  "backend": "ibm_fez",
+  "job_id": "dameumn8gn2s739lbb70",
+  "shots": 100000,
+  "transpiled_depth": 3425,
+  "transpiled_2q": 5982,
+  "usage": "{'quantum_seconds': 50.640924342}",
+  "e_casci_exact": null,
+  "raw_efficiency": {
+    "shots": 100000,
+    "unique_bitstrings": 100000,
+    "frac_correct_particle_number": 0.00311,
+    "frac_correct_particle_number_and_sz": 0.00097
+  },
+  "sqd_energy": -5013.022628214011,
+  "sqd_error_mha": NaN,
+  "sqd_subspace_dim": 288369,
+  "sqd_spin_sq": 0.09124551596787701,
+  "dynamical_decoupling": false,
+  "twirling": false
+}

@@ -1,0 +1,19 @@
+sto-3g_fe3d+brs3p: (22e,16o)  32 qubits | exact CASCI = -5013.72724223 Ha
+
+backend: ibm_fez  (156 qubits)
+transpiled for hardware: depth 2823, 4801 two-qubit gates
+submitting 1,000,000 shots ...
+job id damf1k02fm4c73f2trag - waiting
+Traceback (most recent call last):
+  File "/Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/src/stage7_hardware.py", line 274, in <module>
+    main()
+    ~~~~^^
+  File "/Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/src/stage7_hardware.py", line 240, in main
+    bit_array = submit(args, circuit, norb, nelec)
+  File "/Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/src/stage7_hardware.py", line 161, in submit
+    result = job.result()
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/qiskit_ibm_runtime/runtime_job_v2.py", line 140, in result
+    raise RuntimeInvalidStateError(
+        f"Unable to retrieve result for job {self.job_id()}. Job was cancelled."
+    )
+qiskit_ibm_runtime.exceptions.RuntimeInvalidStateError: 'Unable to retrieve result for job damf1k02fm4c73f2trag. Job was cancelled.'

@@ -1,0 +1,30 @@
+{
+  "tag": "sto-3g_fe3d+brs3p",
+  "note": "single SQD point; full sweep abandoned as too slow on 8 cores (4.4 h/point)",
+  "n_qubits": 32,
+  "cas_dim": 19079424,
+  "e_casci_singlet": -5013.72724223,
+  "runs": [
+    {
+      "depol": 0.0,
+      "samples_per_batch": 1000,
+      "shots": 200000,
+      "energy": -5013.69276393,
+      "error_mha": 34.4783,
+      "subspace_dim": 5716881,
+      "unique_bitstrings": 164532,
+      "frac_valid": 1.0,
+      "spin_sq": 0.0485,
+      "wall_s": 15761.3
+    }
+  ],
+  "ansatz": {
+    "e_ansatz": -5011.36341441,
+    "error_mha": 2363.828,
+    "participation_ratio": 289872.36
+  },
+  "circuit": {
+    "depth": 1523,
+    "two_qubit_gates": 4740
+  }
+}

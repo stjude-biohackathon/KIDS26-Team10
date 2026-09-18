@@ -1,0 +1,91 @@
+
+$ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/src/stage1_classical.py --basis sto-3g --avas-threshold 0.5 --active fe3d --tag sto-3g_fe3d
+
+atoms            : 24
+Fe-Fe            : 2.700 A
+Fe-S(mu2)        : 2.200 A
+S(mu2)-S(mu2)    : 3.474 A
+Fe-S(term)       : 2.300 A
+S-C              : 1.810 A
+S-Fe-S (bridge)  : 104.3 deg
+
+basis=sto-3g  nao=122  nelec=(93, 93)
+RHF E = -5012.99869566  converged=True  (18.7s)
+AVAS ['Fe 3d'] threshold=0.5 -> (10e, 10o), ncore=88, nelec=(np.int64(5), np.int64(5))
+qubits = 20, CAS dimension = 63504 determinants
+  root 0: E = -5013.64906670  <S^2> =  0.0000  S = 0.00
+  root 1: E = -5013.64882205  <S^2> =  2.0000  S = 1.00
+  root 2: E = -5013.64832545  <S^2> =  6.0000  S = 2.00
+  root 3: E = -5013.64756148  <S^2> = 12.0000  S = 3.00
+  root 4: E = -5013.64650476  <S^2> = 20.0000  S = 4.00
+  root 5: E = -5013.64511653  <S^2> = 30.0000  S = 5.00
+CASCI ladder in 11.9s
+Heisenberg fit (H = 2 J S1.S2, E(S) = J S(S+1); J > 0 is antiferromagnetic):
+  J = 28.8 cm^-1   (max residual 4.0e-05 Ha)
+    vs DMRG (30e,20o), Sharma/Chan 2014: 236 cm^-1  (ours is 0.12x)
+    vs experiment, magnetic susceptibility: 148 cm^-1  (ours is 0.19x)
+    vs BS-DFT: 310 cm^-1  (ours is 0.09x)
+CCSD E = -5013.22114778  converged=False  (1.0s)
+  |t1|max = 0.1722  |t2|max = 0.6859
+
+wrote results/stage1_sto-3g_fe3d.json and .npz
+
+$ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/src/stage2_sqd.py --tag sto-3g_fe3d --shots 100000 --optimize-ansatz
+
+exact (CASCI) reference energy: -5013.64906670 Ha   (10 orbitals, 20 qubits, CAS dim 63504)
+
+LUCJ ansatz (n_reps=4): E = -5012.42307609  err = +1225.991 mHa  PR = 3259.38
+circuit: depth=983  2q gates=1908
+
+=== noise sweep (samples_per_batch=800) ===
+  depol=0      valid=100.00%  unique= 26428  dim=  63504  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000  (21.9s)
+  depol=0.001  valid= 99.91%  unique= 26511  dim=  63504  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000  (29.1s)
+  depol=0.003  valid= 99.72%  unique= 26678  dim=  63504  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000  (25.4s)
+  depol=0.01   valid= 99.08%  unique= 27251  dim=  63504  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000  (29.1s)
+  depol=0.03   valid= 97.22%  unique= 28943  dim=  63504  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000  (26.7s)
+  depol=0.1    valid= 90.67%  unique= 34808  dim=  63504  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000  (27.7s)
+
+=== dimension sweep (depol=0.01) ===
+  spb=20    dim=  24649 ( 38.8% of CAS)  E=-5013.29101183  err=+358.0549 mHa  <S^2>=0.0628  (38.6s)
+  spb=50    dim=  48400 ( 76.2% of CAS)  E=-5013.50380547  err=+145.2612 mHa  <S^2>=0.2561  (79.3s)
+  spb=100   dim=  59536 ( 93.8% of CAS)  E=-5013.61316743  err=+35.8993 mHa  <S^2>=0.0706  (70.2s)
+  spb=200   dim=  63001 ( 99.2% of CAS)  E=-5013.64155618  err= +7.5105 mHa  <S^2>=0.0140  (38.3s)
+  spb=400   dim=  63504 (100.0% of CAS)  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000  (43.4s)
+  spb=800   dim=  63504 (100.0% of CAS)  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000  (29.5s)
+
+=== controls ===
+  uniform-random: dim=  63504  E=-5013.64906670  err= +0.0000 mHa  <S^2>=0.0000
+  solver floor (full CAS, same solver): E=-5013.64906670  err= +0.0000 mHa
+  oracle top-25   dim=    361  E=-5013.17437097  err=+474.6957 mHa
+  oracle top-50   dim=   1024  E=-5013.17528613  err=+473.7806 mHa
+  oracle top-100  dim=   4900  E=-5013.18188255  err=+467.1842 mHa
+  oracle top-200  dim=  14400  E=-5013.19337441  err=+455.6923 mHa
+  oracle top-400  dim=  27889  E=-5013.33721921  err=+311.8475 mHa
+  oracle top-800  dim=  54756  E=-5013.55961840  err=+89.4483 mHa
+
+wrote results/stage2_sto-3g_fe3d_opt.json
+
+$ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/src/stage2b_orbital_opt.py --tag sto-3g_fe3d --shots 100000 --oo-iters 12
+
+exact (CASCI) reference energy: -5013.64906670 Ha  (CAS dim 63504)
+
+samples: 100000 shots, 99.08% valid, 1943 unique
+
+  spb=20   dim=   4356 (  6.9% of CAS)  before OO -5013.24405107 (+405.016 mHa)  ->  after OO -5013.27668919 (+372.378 mHa)  (16s)
+  spb=50   dim=  15129 ( 23.8% of CAS)  before OO -5013.29998075 (+349.086 mHa)  ->  after OO -5013.32555962 (+323.507 mHa)  (28s)
+  spb=100  dim=  26569 ( 41.8% of CAS)  before OO -5013.32540173 (+323.665 mHa)  ->  after OO -5013.33530445 (+313.762 mHa)  (43s)
+  spb=200  dim=  46225 ( 72.8% of CAS)  before OO -5013.47366550 (+175.401 mHa)  ->  after OO -5013.50215964 (+146.907 mHa)  (57s)
+
+wrote results/stage2b_sto-3g_fe3d.json
+
+$ /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/src/stage3_report.py --tag sto-3g_fe3d --suffix _opt
+
+wrote /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/results/RESULTS_sto-3g_fe3d_opt.md
+wrote /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/results/figures/convergence_sto-3g_fe3d_opt.png
+wrote /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/results/figures/noise_sto-3g_fe3d_opt.png
+wrote /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/results/figures/iterations_sto-3g_fe3d_opt.png
+wrote /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/results/figures/occupancies_sto-3g_fe3d_opt.png
+wrote /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/results/figures/spin_ladder_sto-3g_fe3d.png
+wrote /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/results/figures/orbital_opt_sto-3g_fe3d.png
+
+done - see results/RESULTS_*.md and results/figures/

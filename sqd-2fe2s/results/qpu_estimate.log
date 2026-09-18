@@ -1,0 +1,16 @@
+(10e,10o) 20 qubits | exact CASCI = -5013.64906670 Ha
+
+backend           ibm_fez  (156 qubits)
+transpiled depth  1744
+two-qubit gates   2052
+shots requested   10,000
+
+per-shot circuit  54.9 us
+est. QPU time     0.5 s  (0.1% of a 600 s budget)
+  (excludes queue wait and per-job overhead, which are not QPU time)
+
+median 2q error   2.92e-03
+expected fraction of shots with no 2q error: 0.25%
+  post-selection + configuration recovery is meant to rescue the rest
+
+NO QPU TIME USED. Re-run without --estimate to submit.

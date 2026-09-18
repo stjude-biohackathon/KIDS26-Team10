@@ -1,0 +1,23 @@
+sto-3g_fe3d: (10e,10o)  20 qubits | exact CASCI = -5013.64906670 Ha
+
+backend: ibm_fez  (156 qubits)
+transpiled for hardware: depth 1677, 2031 two-qubit gates
+submitting 100,000 shots ...
+job id dameitg2fm4c73f2t3f0 - waiting
+
+wall 40s   reported usage: {'quantum_seconds': None}
+raw samples saved to /Users/sohamb172/Desktop/Final Scoring Function/SQD_BioHackathon/results/hardware_samples_sto-3g_fe3d.json - post-processing can be replayed for free
+
+RAW HARDWARE SAMPLES
+  shots                      100,000
+  correct electron count     17.22%
+  correct count AND spin     5.90%
+  unique bitstrings          95,300
+
+AFTER CLASSICAL POST-PROCESSING
+  energy                     -5013.64906670 Ha
+  error vs exact             +0.0000 mHa
+  subspace                   63,504 (100.0% of the space)
+  <S^2>                      0.0000
+
+wrote results/stage7_hardware_result.json

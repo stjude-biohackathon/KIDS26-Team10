@@ -1,0 +1,133 @@
+{
+  "source_tag": "sto-3g_fe3d+brs3p+2terms3p",
+  "config": {
+    "source_tag": "sto-3g_fe3d+brs3p+2terms3p",
+    "norb_list": [
+      6,
+      8,
+      10,
+      12,
+      14,
+      16
+    ],
+    "shots": 50000,
+    "n_reps": 2,
+    "samples_per_batch": 300,
+    "num_batches": 2,
+    "max_iterations": 3,
+    "optimize_ansatz": true,
+    "max_casci_dim": 20000000,
+    "max_casci_seconds": 3600.0,
+    "seed": 2026
+  },
+  "note": "TIMING STUDY ONLY - truncated active spaces are not physically meaningful; energies are reported for reproducibility, not chemistry",
+  "rows": [
+    {
+      "norb": 6,
+      "nelec": [
+        3,
+        3
+      ],
+      "n_qubits": 12,
+      "cas_dim": 400,
+      "casci": {
+        "energy": -50.75780980119322,
+        "wall_s": 0.026305675506591797
+      },
+      "sqd_sample_s": 0.8538897037506104,
+      "sqd_solve_s": 0.10888981819152832,
+      "sqd_subspace_dim": 16,
+      "sqd_energy": -45.221959165855615,
+      "circuit_depth": 342
+    },
+    {
+      "norb": 8,
+      "nelec": [
+        4,
+        4
+      ],
+      "n_qubits": 16,
+      "cas_dim": 4900,
+      "casci": {
+        "energy": -66.37840455315003,
+        "wall_s": 0.04526495933532715
+      },
+      "sqd_sample_s": 0.6007411479949951,
+      "sqd_solve_s": 0.32320094108581543,
+      "sqd_subspace_dim": 81,
+      "sqd_energy": -59.03551712175714,
+      "circuit_depth": 442
+    },
+    {
+      "norb": 10,
+      "nelec": [
+        5,
+        5
+      ],
+      "n_qubits": 20,
+      "cas_dim": 63504,
+      "casci": {
+        "energy": -77.66353700929412,
+        "wall_s": 0.36174702644348145
+      },
+      "sqd_sample_s": 1.5867691040039062,
+      "sqd_solve_s": 0.7299449443817139,
+      "sqd_subspace_dim": 4900,
+      "sqd_energy": -75.07585897343039,
+      "circuit_depth": 542
+    },
+    {
+      "norb": 12,
+      "nelec": [
+        6,
+        6
+      ],
+      "n_qubits": 24,
+      "cas_dim": 853776,
+      "casci": {
+        "energy": -87.67316488586512,
+        "wall_s": 10.297520875930786
+      },
+      "sqd_sample_s": 3.2546780109405518,
+      "sqd_solve_s": 1.1378819942474365,
+      "sqd_subspace_dim": 5929,
+      "sqd_energy": -85.97871781587435,
+      "circuit_depth": 630
+    },
+    {
+      "norb": 14,
+      "nelec": [
+        7,
+        7
+      ],
+      "n_qubits": 28,
+      "cas_dim": 11778624,
+      "casci": {
+        "energy": -96.88323815640435,
+        "wall_s": 288.63069701194763
+      },
+      "sqd_sample_s": 3.233276128768921,
+      "sqd_solve_s": 3.327453136444092,
+      "sqd_subspace_dim": 14161,
+      "sqd_energy": -95.47722222654542,
+      "circuit_depth": 723
+    },
+    {
+      "norb": 16,
+      "nelec": [
+        8,
+        8
+      ],
+      "n_qubits": 32,
+      "cas_dim": 165636900,
+      "casci": {
+        "skipped": "CAS dimension 165636900 exceeds --max-casci-dim 20000000"
+      },
+      "sqd_sample_s": 48.23120832443237,
+      "sqd_solve_s": 8.467598676681519,
+      "sqd_subspace_dim": 16641,
+      "sqd_energy": -104.5348010564936,
+      "circuit_depth": 810
+    }
+  ]
+}
