@@ -1,0 +1,14 @@
+nao = 286, nelectron = 186, spin(2S) = 0
+SCF not converged.
+SCF energy = -5067.0144041795 after 150 cycles  <S^2> = 0.0014242874  2S+1 = 1.0028445
+UHF converged: False   E(UHF) = -5067.01440418 Ha   (609.5 s)
+<S^2> = 0.0014  (2S+1 = 1.0028; ideal singlet has <S^2>=0)
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/__modal/volumes/vo-WrzHGuKaxWyKoEkuN7N7DG/files/src/meanfield.py", line 114, in <module>
+    spins = spin_density_per_atom(mf, mol)
+  File "/__modal/volumes/vo-WrzHGuKaxWyKoEkuN7N7DG/files/src/meanfield.py", line 90, in spin_density_per_atom
+    spin_pop = pop_a - pop_b
+               ~~~~~~^~~~~~~
+TypeError: unsupported operand type(s) for -: 'tuple' and 'tuple'

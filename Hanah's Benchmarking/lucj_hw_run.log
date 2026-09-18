@@ -1,0 +1,25 @@
+restricted interaction_pairs: aa/bb (linear chain) = [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6), (6, 7), (7, 8), (8, 9)]
+                              ab (heavy-hex default) = [(0, 0), (4, 4), (8, 8)]
+n_params = 112 (vs 210 for the unrestricted/dense ansatz)
+E(HF determinant) = -5011.984685 Ha
+E(random hw-LUCJ, n_reps=1, seed=0) = -5011.845757 Ha
+optimizing with linear-method VQE, max_iter=10 ...
+  iter 1: E = -5012.268498 Ha  (45 s elapsed)
+  iter 2: E = -5012.477665 Ha  (73 s elapsed)
+  iter 3: E = -5012.603299 Ha  (103 s elapsed)
+  iter 4: E = -5012.731414 Ha  (124 s elapsed)
+  iter 5: E = -5012.823673 Ha  (152 s elapsed)
+  iter 6: E = -5012.869503 Ha  (172 s elapsed)
+  iter 7: E = -5012.894240 Ha  (193 s elapsed)
+  iter 8: E = -5012.904618 Ha  (216 s elapsed)
+  iter 9: E = -5012.909618 Ha  (237 s elapsed)
+  iter 10: E = -5012.913106 Ha  (240 s elapsed)
+
+done in 239.8 s
+E(HF)              = -5011.984685 Ha  (gap to CASCI: 1465.95 mHa)
+E(random hw-LUCJ)  = -5011.845757 Ha  (gap to CASCI: 1604.87 mHa)
+E(optimized hw-LUCJ) = -5012.913106 Ha  (gap to CASCI: 537.52 mHa)
+E_CASCI(S=0, exact)= -5013.450631 Ha
+optimization trace (Ha): -5012.2685, -5012.4777, -5012.6033, -5012.7314, -5012.8237, -5012.8695, -5012.8942, -5012.9046, -5012.9096, -5012.9131
+
+saved -> data/processed/lucj_ansatz_hw.npz

@@ -1,0 +1,12 @@
+nao = 122, nelectron = 186, spin(2S) = 0
+
+WARN: HOMO 0.4119437137110735 > LUMO 0.3506723595213613 was found in the canonicalized orbitals.
+
+converged SCF energy = -5012.62355629081  <S^2> = 9.074668  2S+1 = 6.1072639
+high-spin (Ms=5) UHF: E = -5013.91024996 Ha, converged=True
+BS-UHF (Ms=0) converged: True   E(UHF) = -5012.62355629 Ha   (82.8 s)
+E(BS) - E(HS) = 1286.694 mHa (expect < 0: antiferromagnetic coupling favors the low-spin state)
+<S^2> = 9.0747  (2S+1 = 6.1073; ideal Ms=0 singlet has <S^2>=0, a genuine BS solution for 2x S=5/2 sites has <S^2> >> 0, roughly 5-15)
+Mulliken spin density (alpha-beta) on Fe atoms (expect opposite signs, |.|~3-4):
+  atom 0:Fe: +3.869
+  atom 1:Fe: +4.145

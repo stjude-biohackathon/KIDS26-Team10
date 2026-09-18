@@ -1,0 +1,22 @@
+E(HF determinant) = -5011.984685 Ha
+E(random LUCJ, n_reps=1, seed=0) = -5011.835946 Ha
+optimizing with linear-method VQE, max_iter=10 ...
+  iter 1: E = -5012.023889 Ha  (77 s elapsed)
+  iter 2: E = -5012.250845 Ha  (115 s elapsed)
+  iter 3: E = -5012.358793 Ha  (153 s elapsed)
+  iter 4: E = -5012.444074 Ha  (190 s elapsed)
+  iter 5: E = -5012.512869 Ha  (230 s elapsed)
+  iter 6: E = -5012.550987 Ha  (270 s elapsed)
+  iter 7: E = -5012.595859 Ha  (310 s elapsed)
+  iter 8: E = -5012.655125 Ha  (348 s elapsed)
+  iter 9: E = -5012.747315 Ha  (388 s elapsed)
+  iter 10: E = -5012.813162 Ha  (392 s elapsed)
+
+done in 391.9 s
+E(HF)              = -5011.984685 Ha  (gap to CASCI: 1465.95 mHa)
+E(random LUCJ)     = -5011.835946 Ha  (gap to CASCI: 1614.68 mHa)
+E(optimized LUCJ)  = -5012.813162 Ha  (gap to CASCI: 637.47 mHa)
+E_CASCI(S=0, exact)= -5013.450631 Ha
+optimization trace (Ha): -5012.0239, -5012.2508, -5012.3588, -5012.4441, -5012.5129, -5012.5510, -5012.5959, -5012.6551, -5012.7473, -5012.8132
+
+saved -> data/processed/lucj_ansatz.npz

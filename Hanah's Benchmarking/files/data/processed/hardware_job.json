@@ -1,0 +1,15 @@
+{
+  "job_id": "dam94ug2fm4c73f2jeeg",
+  "backend": "ibm_kingston",
+  "shots": 10000,
+  "ncas": 10,
+  "nelecas": [
+    5,
+    5
+  ],
+  "n_2q_gates": 338,
+  "depth": 235,
+  "submitted_at": 1789694586.6434684,
+  "e_hf": -5011.98468490833,
+  "e_opt": -5012.913106392306
+}
