@@ -110,12 +110,12 @@ For details, please visit: https://issuu.com/sjcrh/docs/st._jude_code_of_conduct
 
 Use this space for the material that helps someone understand the project after the event.
 
-- **Final demo or report:** [Add a link]
-- **Main result:** [Summarize what the team built or learned]
-- **How to reproduce or run it:** [Link to the relevant instructions]
-- **Data and source notes:** [Link to provenance, citations, and licenses]
-- **Known limitations:** [What should a reader be careful about?]
-- **Next steps:** [What would be worth doing next?]
+- **Final demo or report:** [Project report](../sqd-2fe2s/REPORT.md) and [final presentation](../presentation/BH26_Team10_Presentation.pptx).
+- **Main result:** The 20-qubit SQD calculation matched CASCI at reported precision using full-space recovery; a random-sampling control matched it too. At 32 qubits, the tested SQD run was slower and less accurate than CASCI. No computational advantage was demonstrated.
+- **How to reproduce or run it:** [Quick demo](../README.md#run-the-demo), [full instructions](../sqd-2fe2s/README.md), and [hardware replay](../sqd-2fe2s/docs/HARDWARE.md).
+- **Data and source notes:** [Numerical provenance](../sqd-2fe2s/docs/RESULTS_MASTER.md), [references](../sqd-2fe2s/docs/REFERENCES.md), and [license](../LICENSE.md).
+- **Known limitations:** Minimal STO-3G basis; active spaces are not strictly nested; the 36-qubit singlet reference is extrapolated; hardware and runtime conclusions apply to the tested settings. See the [report](../sqd-2fe2s/REPORT.md).
+- **Next steps:** Complete the missing classical spin sectors, test larger SQD subspaces and shallower circuits, and examine basis-set effects.
 
 Keep generated figures and reports clearly named. Do not commit sensitive data or files that cannot be redistributed.
 
